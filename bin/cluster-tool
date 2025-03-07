@@ -1,0 +1,87 @@
+#!/usr/bin/env Rscript
+
+suppressPackageStartupMessages(library(optparse))
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(HIVNetworkClustering))
+suppressPackageStartupMessages(library(Biostrings))
+suppressPackageStartupMessages(library(ape))
+
+parser <- OptionParser() %>%
+    add_option(c("--sequences"), type = "character", metavar="file",
+               help = "Fasta file containing unaligned sequences") %>%
+    add_option(c("--alignment"), type = "character", metavar="file",
+               help = "Fasta file containing aligned sequences") %>%
+    add_option(c("--tree"),      type = "character", metavar="file",
+               help = "File containing a phylogenetic tree in Newick format") %>%
+    add_option(c("--method"),    type = "character",
+               help = "Distance measure to use. Options are tn93 and phylo") %>%
+    add_option(c("--output"),    type = "character", metavar="file",
+               help = "Filename for CSV output") %>%
+    add_option(c("--distance"),    type = "character", metavar="file",
+               help = "Filename for CSV output") %>%
+    add_option(c("--min-cluster-size"), type = "integer", default = 5,
+               help = "Minimum number of individuals per cluster (default %default)") %>%
+    add_option(c("--distance-threshold"), type = "double", default = 0.02,
+               help = "Maximum distance to call two individuals linked (default %default)")
+
+options <- parse_args(parser, convert_hyphens_to_underscores=TRUE)
+print(options)
+
+result <- NULL
+distance_result <- NULL
+
+get_alignment <- function(sequences = NULL, alignment = NULL) {
+    if (is.null(alignment)) {
+        if (is.null(sequences)) {
+            return(NULL)
+        } else {
+            sequences <- readDNAStringSet(sequences)
+            return(mafft(sequences))
+        }
+    } else {
+        return(readDNAStringSet(alignment))
+    }
+}
+
+get_tree <- function(sequences = NULL, alignment = NULL, tree = NULL) {
+    if (is.null(tree)) {
+        alignment <- get_alignment(sequences, alignment)
+        if (is.null(alignment)) {
+            return(NULL)
+        } else {
+            return(FastTree(alignment))
+        }
+    } else {
+        return(read.tree(tree))
+    }
+}
+
+result <- NULL
+distance <- NULL
+if(options$method == "tn93") {
+    print("====== alignment ======")
+    alignment <- get_alignment(options$sequences, options$alignment)
+    if (is.null(alignment)) {
+        stop("Must provide an alignment or unaligned sequences")
+    }
+    print(alignment)
+    print("====== distance ======")
+    distance_result <- tn93_distances(alignment)
+    print(distance_result)
+    print("====== result ======")
+    print(alignment)
+    result <- cluster_by_tn93_distance(alignment, min_size = options$min_cluster_size,
+                                       distance_threshold = options$distance_threshold)
+    
+    print(result)
+} else if (options$method == "phylo") {
+    tree <- get_tree(options$sequences, options$alignment, options$tree)
+    distance_result <- patristic_distances(tree)
+    result <- cluster_by_patristic_distance(tree, min_size = options$min_cluster_size,
+                                       distance_threshold = options$distance_threshold)
+} else {
+    stop("Unknown method: ", options$method)
+}
+
+write_csv(enframe(result, name = "sequence_name", value = "cluster_id"), options$output)
+write_csv(distance_result, options$distance)

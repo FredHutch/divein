@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Calculate TN93 pairwise distances on a multiple-alignment</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for tn93 {HIVNetworkClustering}"><tr><td>tn93 {HIVNetworkClustering}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Calculate TN93 pairwise distances on a multiple-alignment</h2>
+
+<h3>Description</h3>
+
+<p>Runs <code>tn93</code> on a DNAStringSet or filesystem path.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+tn93(alignment)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dna_string_set</code></td>
+<td>
+<p>A Biostrings DNAStringSet of aligned sequences
+or a filesystem path to a multiple-sequence alignment</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Ambiguous base distances are minimized (resolved) between sequences with
+less than 1.5% ambiguous bases, and averaged between sequences with more
+than that.  All pairwise distances are reported between sequences with at
+least 500 overlapping bases.  These parameters are intended to match the
+CDC-recommended usage of HIV-TRACE.
+</p>
+<p>The DNAStringSet or filesystem path must contain a multiple-sequence
+alignment.
+</p>
+<p>The <code>tn93</code> executable must be in your <code>PATH</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame with three columns: id1, id2, and distance.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>HIVNetworkClustering</em> version 0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

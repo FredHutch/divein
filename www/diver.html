@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Phylogeny/Divergence/Diversity</title>
+	<link href='static/css/divein.css' media="screen" rel="Stylesheet" type="text/css"></link>
+	<script type="text/javascript" src='/static/js/divein.js'></script>
+</head>
+<body onload="reset_all(document.forms[0]);">
+	
+    <div>
+    	<div class="title">DIVEIN</div>
+    	<div><img src="/static/images/Jim&Lisa/header.jpg" width='400' height='120' style="float:left"></img></div>
+    	<div class="s-title">Divergence, Diversity,<br>Informative Sites and<br>Phylogenetic Analyses</div>
+    	<div><img src="/static/images/Jim&Lisa/KoHa-10_m.jpg" height='120' style="float:right"></img></div>
+    </div>
+    <div class="spacer"></div>  
+    <div class="navbar">
+		<a href='index.html' class="nav">Home</a>
+		<a href="insites.html" >Informative sites</a>
+		<a href="cot.html" >Center Of Tree</a>
+		<div class="dropdown">
+			<button class="dropbtn"><strong>Phylogeny/Divergence/Diversity</strong>
+			  <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-content">
+			  <a href="diver.html">PhyML 3.3.20220408</a>
+			  <a href="fasttree.html">FastTree 2.1.10</a>
+			  <a href="raxml.html">RAxML 8.2.12</a>			 
+			  <a href="hd.html">Hamming distance</a>
+			</div>
+	  	</div> 
+		<a href="tst.html" >Two-Sample Tests</a>
+		<a href="cluster.html" >Sequence clustering</a>
+		<a href="retrieve.html" >Retrieve results</a>
+		<a href='contact.html' >Contact</a>
+		<a href='help.html' >Help</a>
+  	</div>
+    <div id="indent">
+	<!-- maintainance message goes here -->
+    <!-- end of message -->
+    	<h2>Phylogeny/Divergence/Diversity by PhyML 3.3.20220408</h2>
+    	<form enctype='multipart/form-data' name="alignmentForm" method="post" onsubmit="return CheckDiverForm(this);">
+		<input type=hidden name='local' value='DIVEIN'>
+		<input type=hidden name='program' value='phyml'>
+		<div class='box'>
+    		<div id="title">
+				<span><strong>Data Input</strong></span>
+			</div>
+
+    		<div class='row'>
+    			<span class='label'>Upload sequence alignment file <a href="help.html#sequence"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='file' id='seqFile' name='seqFile'></span>
+<!--    			<span class='alignrightcol'><input type='radio' id='seqRadio3' name='seqRadio' value='nexus' onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype)">Nexus</span>  -->			
+    			<span class='alignrightcol'><input type='radio' id='seqRadio2' name='seqRadio' value='phylip' onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype)">Phylip</span>
+    			<span class='alignrightcol'><input type='radio' id='seqRadio1' name='seqRadio' value='fasta' checked onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype)">Fasta</span>
+				<span class='alignrightcol'><input type='radio' id='seqRadio4' name='seqRadio' value='example' onclick = "remove_value(this.form.seqFile); 
+				disable_field(this.form.seqFile); disable_field(this.form.datatype); changeOptions('nt', 'subModel', 'phyml')">Example <a href='examples/seqFile'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Sequence data type <a href="help.html#datatype"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='datatype' name='datatype' onchange="changeOptions(this.value, 'subModel', 'phyml'); disable_field(this.form.ttText); disable_grpRadio(this.form.ttRadio);">
+    				<option value=''>-- Please select a data type --</option>	
+    				<option value='nt' selected>DNA</option>
+    				<option value='aa'>Protein</option>
+    				</select>
+    			</span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Job seed <a href="help.html#seed"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='seedText' name='seedText' size='25' disabled></span>
+    			<span class='alignrightcol'>&nbsp;</span>
+    			<span class='alignrightcol'><input type='radio' name='seedRadio' value='fixed' onclick = "enable_field(this.form.seedText, '')">Fixed</span>
+    			<span class='alignrightcol'><input type='radio' name='seedRadio' value='random' checked onclick = "disable_field(this.form.seedText)">Randomized</span>
+    		</div> 		
+    		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Substitution Model</strong></span>
+			</div>
+    		<div class='row'>
+    			<span class='label'>Substitution model <a href="help.html#model"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='subModel' name='subModel' onchange="handleTT(this.value, this.form.ttText, this.form.ttRadio1, this.form.ttRadio2); handleFreq(this.value, this.form.freq)">
+    				<option value='F81' >F81</option>
+    				<option value='GTR' selected>GTR</option>
+    				<option value='HKY85'>HKY85</option>
+    				<option value='JC69'>JC69</option>
+    				<option value='K80' >K80</option>
+    				<option value='TN93'>TN93</option>
+    				</select>
+    			</span>
+    		</div>
+		<div class='row'>
+    			<span class='label'>Equilibrium frequencies <a href="help.html#frequency"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='freq' name='freq'>
+    				<option value='m' selected >Optimized</option>
+    				<option value='e' >Empirical</option>
+    				</select>
+    			</span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Transition/transversion ratio <a href="help.html#ttratio"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='ttText' name='ttText' size='25' disabled></span>
+    			<span class='alignrightcol'>&nbsp;</span>
+    			<span class='alignrightcol'><input type='radio' id='ttRadio1' name='ttRadio' value='f' disabled onclick = "enable_field(this.form.ttText, 4)">Fixed</span>
+    			<span class='alignrightcol'><input type='radio' id='ttRadio2' name='ttRadio' value='e' checked disabled onclick = "disable_field(this.form.ttText)">Estimated</span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Proportion of invariable sites <a href="help.html#proportion"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='propText' name='propText' size='25' disabled></span>
+    			<span class='alignrightcol'>&nbsp;</span>
+    			<span class='alignrightcol'><input type='radio' name='propRadio' value='fixed' onclick = "enable_field(this.form.propText, '')">Fixed</span>
+    			<span class='alignrightcol'><input type='radio' name='propRadio' value='estimated' checked onclick = "disable_field(this.form.propText)">Estimated</span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Number of substitution rate categories <a href="help.html#categories"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' name='catText' value=4 size='25' onchange="disableGamma(this.value, this.form.gammaText, this.form.gammaRadio1, this.form.gammaRadio2)"></span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Gamma distribution parameter <a href="help.html#gamma"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='gammaText' name='gammaText' size='25' disabled></span>
+    			<span class='alignrightcol'>&nbsp;</span>
+    			<span class='alignrightcol'><input type='radio' id='gammaRadio1' name='gammaRadio' value='fixed' onclick = "enable_field(this.form.gammaText, '')">Fixed</span>
+    			<span class='alignrightcol'><input type='radio' id='gammaRadio2' name='gammaRadio' value='estimated' checked onclick = "disable_field(this.form.gammaText)">Estimated</span>
+    		</div>
+    		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Tree Searching</strong></span>
+			</div>
+<!--   		<div class='row'>
+    			<span class='label'>Type of tree improvement <a href="help.html#treeImprovType"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='treeImprovType' name='treeImprovType'">
+    				<option value='NNI' selected>NNI</option>
+    				<option value='SPR'>SPR</option>
+    				<option value='BEST'>Best of NNI & SPR</option>
+    				</select>
+    			</span>
+    		</div>-->
+    		<div class='row'>
+    			<span class='label'>Optimise tree <a href="help.html#optimise"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='optimise' name='optimise' onchange="handle_treeImprovType(this.value, this.form.treeImprovType)">
+    				<option value='tlr' selected>Topology + branch lengths</option>
+    				<option value='lr'>Branch lengths only</option>
+    				<option value='n'>None</option>
+    				</select>
+    			</span>
+    		</div>
+       		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Branch Support</strong></span>
+			</div>
+    		<div class='row'>
+    			<span class='label'>Compute aLRT <a href="help.html#aLRT"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='aLRT' name='aLRT' disabled='disabled'">
+    				<option value=-1>aLRT statistics</option>
+    				<option value=-2>Chi2-based</option>
+    				<option value=-4>SH-like</option>
+    				<option value=-5 selected>approximate Bayes</option>
+    				</select>
+    			</span>
+    			<span class='alignrightcol'>&nbsp;</span>    			
+    			<span class='alignrightcol'><input type='radio' id='aLRTRadio1' name='aLRTRadio' value='yes' onclick = "enable_select(this.form.aLRT); 
+    			check_radio(this.form.bsRadio2); disable_field(this.form.bsText); select_multiple(this.form.divermeasure, 0); disable_select(this.form.divermeasure);">Yes</span>
+    			<span class='alignrightcol'><input type='radio' id='aLRTRadio2' name='aLRTRadio' value='no' checked onclick = "disable_select(this.form.aLRT); 
+    			enable_select(this.form.divermeasure);">No</span>
+    		</div>
+<!--   		<div class='row'>
+    			<span class='label'>Perform bootstrap <a href="help.html#bootstrap"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='bsText' name='bsText' size='25' disabled></span>
+    			<span class='alignrightcol'>&nbsp;</span>
+    			<span class='alignrightcol'><input type='radio' id='bsRadio1' name='bsRadio' value='yes' disabled onclick = "enable_field(this.form.bsText, 100); 
+    			check_radio(this.form.aLRTRadio2); disable_select(this.form.aLRT); select_multiple(this.form.divermeasure, 0); disable_select(this.form.divermeasure);">Yes</span>
+    			<span class='alignrightcol'><input type='radio' id='bsRadio2' name='bsRadio' value='no' checked disabled onclick = "disable_field(this.form.bsText); 
+    			enable_select(this.form.divermeasure);">No</span>
+    		</div>-->
+    		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Divergence/Diversity measurements</strong>&nbsp;&nbsp;&nbsp;<font color=yellow>*Defining groups and selecting sequences for calculating divergence are on the next page, after you click "Submit & Email Results".</font></span>
+			</div>    		
+    		<div class='row'>
+    			<span class='label'>Calculate divergence/diversity based on <a href="help.html#diverFormat"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select name='divermeasure' MULTIPLE size=2>
+    				<option value='pairwise' selected>Pairwise distance</option>	
+    				<option value='tree'>Tree</option>
+    				</select>
+    			</span>
+    		</div>
+    		<div class='spacer'>&nbsp;</div>  		
+    		<div id="title">
+				<span><strong>Your Information</strong></span>
+			</div>
+			
+			<div class='row'>
+				<span class='label'>Your email <a href="help.html#email"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+				<span class='formw'><input type='text' name='email' size='25'></span>
+			</div>
+		</div>
+    	
+    	<div class='row' align=center>
+			<span><input type='submit' value=' Submit & Email Results ' size='25'></span>
+			<span><input type='button' value=' Reset ' onclick="window.location.href=window.location.href"></span>
+		</div>   	
+    	</form>
+    	<br>
+    	<div>
+    	<p style = "font-size: 12px">When using PhyML please cite the following paper: Guindon S., Dufayard J.F., Lefort V., Anisimova M., Hordijk W., Gascuel O., 
+    	<a href="http://www.atgc-montpellier.fr/download/papers/phyml_2010.pdf">New Algorithms and Methods to Estimate Maximum-Likelihood Phylogenies: Assessing the Performance of PhyML 3.0.</a>
+		Systematic Biology, 59(3):307-21, 2010.
+		</p>
+		</div>
+	</div>
+	<div id="footer" align=center>
+		<p class="copyright">&copy; 2025 Fred Hutch Cancer Center. All rights reserved.</p>
+	</div>
+	<!-- mail server message goes here -->	
+	<!-- end of message -->
+</body>
+</html>
+
+

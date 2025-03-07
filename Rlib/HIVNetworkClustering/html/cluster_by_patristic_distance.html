@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Identify clusters in a phylogeny</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cluster_by_patristic_distance {HIVNetworkClustering}"><tr><td>cluster_by_patristic_distance {HIVNetworkClustering}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Identify clusters in a phylogeny</h2>
+
+<h3>Description</h3>
+
+<p>Uses a variation on the method of AFY Poon et al
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cluster_by_patristic_distance(tree, min_size = 5, distance_threshold = 0.02)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>tree</code></td>
+<td>
+<p>A phylogenetic tree of the phylo class</p>
+</td></tr>
+<tr valign="top"><td><code>min_size</code></td>
+<td>
+<p>Minimum size of components to report as clusters</p>
+</td></tr>
+<tr valign="top"><td><code>distance_threshold</code></td>
+<td>
+<p>Pairwise patristic distance between taxa not
+exceeding this threshold will be clustered together</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>As originally described, the adjacency matrix of the clustering graph is
+derived not from a single tree, but from 100 trees built from 100 bootstrap-
+sampled alignments. Patristic distance between taxa is calculated for each
+tree, and only those taxa below the threshold in a majority of trees have an
+edge in the final graph.
+</p>
+<p>The default distance threshold of 0.02 substitutions/base is an empirically
+chosen value specific to the BC work by Poon et al., and is used here by
+way of example and not with any particular claim to quality
+(doi:10.1093/infdis/jiu560).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named numeric vector; the names are taxa labels from the tree, the
+values are the component of the clustering graph the named taxon is
+connected to, if the component size is at least <code>min_size</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>HIVNetworkClustering</em> version 0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

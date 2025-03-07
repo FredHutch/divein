@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Center of Tree</title>
+	<link href='/static/css/divein.css' media="screen" rel="Stylesheet" type="text/css">
+	<script type="text/javascript" src='/static/js/divein.js'></script>	
+</head>
+<body>
+	
+    <div>
+    	<div class="title">DIVEIN</div>
+    	<div><img src="/static/images/Jim&Lisa/header.jpg" width='400' height='120' style="float:left"></div>
+    	<div class="s-title">Divergence, Diversity,<br>Informative Sites and<br>Phylogenetic Analyses</div>
+    	<div><img src="/static/images/Jim&Lisa/KoHa-90.jpg" height='120' style="float:right"></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="navbar">
+		<a href='index.html' class="nav">Home</a>
+		<a href="insites.html" >Informative sites</a>
+		<a href="cot.html" ><strong>Center Of Tree</strong></a>
+		<div class="dropdown">
+			<button class="dropbtn">Phylogeny/Divergence/Diversity 
+			  <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-content">
+			  <a href="diver.html">PhyML 3.3.20220408</a>
+			  <a href="fasttree.html">FastTree 2.1.10</a>
+			  <a href="raxml.html">RAxML 8.2.12</a>
+			  <a href="hd.html">Hamming distance</a>
+			</div>
+	  	</div> 
+		<a href="tst.html" >Two-Sample Tests</a>
+		<a href="cluster.html" >Sequence clustering</a>
+		<a href="retrieve.html" >Retrieve results</a>
+		<a href='contact.html' >Contact</a>
+		<a href='help.html' >Help</a>
+  	</div>
+    <div id="indent">
+    <!-- maintainance message goes here -->
+    <!-- end of message -->
+    	<h2>Center Of Tree</h2>
+    	<form enctype='multipart/form-data' action="/cgi-bin/cot/cotseq.cgi" name="alignmentForm" method="post" onsubmit="return CheckCotForm(this);">
+		<input type=hidden name='local' value='DIVEIN'>
+		<div class='box'>
+    		 <div id="title">
+				<span><strong>Sequence Data</strong></span>
+			</div>
+			
+    		<div class='row'>
+    			<span class='label'>Upload sequence alignment file <a href='help.html#sequence'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='file' id='seqFile' name='seqFile'></span>
+<!--    			<span class='alignrightcol'><input type='radio' id='seqRadio3' name='seqRadio' value='nexus' onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype); enable_grpRadio(this.form.treeRadio)">Nexus</span>    -->			
+    			<span class='alignrightcol'><input type='radio' id='seqRadio2' name='seqRadio' value='phylip' onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype); enable_grpRadio(this.form.treeRadio)">Phylip</span>
+    			<span class='alignrightcol'><input type='radio' id='seqRadio1' name='seqRadio' value='fasta' checked onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype); enable_grpRadio(this.form.treeRadio)">Fasta</span>
+				<span class='alignrightcol'><input type='radio' id='seqRadio4' name='seqRadio' value='example' onclick = "disable_field(this.form.seqFile); 
+				disable_field(this.form.datatype); disable_field(this.form.treeFile); check_radio(this.form.treeRadio2); disable_grpRadio(this.form.treeRadio)">Example <a href='examples/seqFile'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span>
+    		</div>
+
+    		<div class='row'>
+    			<span class='label'>Sequence data type <a href='help.html#datatype'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='datatype' name='datatype'">
+    				<option value='' selected>-- Please select a data type --</option>	
+    				<option value='nt'>DNA</option>
+    				<option value='aa'>Protein</option>
+    				</select>
+    			</span>
+    		</div> 		
+    		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Tree Input</strong></span>
+			</div>
+    		<div class='row'>
+    			<span class='label'>Upload newick tree file (optional) <a href='help.html#tree'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='file' id='treeFile' name='treeFile' disabled></span>
+    			<span class='alignrightcol'>&nbsp;</span>
+    			
+    			<span class='alignrightcol'><input type='radio' id='treeRadio1' name='treeRadio' value='yes' onclick = "enable_field(this.form.treeFile)">Yes</span>
+    			<span class='alignrightcol'><input type='radio' id='treeRadio2' name='treeRadio' value='no' checked onclick = "disable_field(this.form.treeFile)">No</span>
+    			<!--<span class='alignrightcol'><input type='radio' id='treeRadio3' name='treeRadio' value='example' onclick = "disable_field(this.form.treeFile)">Example</span>-->
+    		</div>
+    		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Your Information</strong></span>
+			</div>
+			
+			<div class='row'>
+				<span class='label'>Your email <a href='help.html#email'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+				<span class='formw'><input type='text' name='email' size='25'></span>
+			</div>
+		</div>
+    	
+    	<div class='row' align=center>
+			<span><input type='submit' value=' Submit & Email Results '></span>
+			<span><input type='button' value=' Reset ' onclick="window.location.href=window.location.href"></span>
+		</div>
+    	
+    	</form>
+
+	</div>
+	</div>
+	<div id="footer" align="center">
+		<p class="copyright">&copy; 2025 Fred Hutch Cancer Center. All rights reserved.</p>
+	</div>
+	<!-- mail server message goes here -->	
+	<!-- end of message -->
+</body>
+</html>
+
+

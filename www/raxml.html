@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Phylogeny/Divergence/Diversity</title>
+	<link href="/static/css/divein.css" media="screen" rel="Stylesheet" type="text/css"></link>
+	<script type="text/javascript" src="/static/js/divein.js"></script>
+</head>
+<body onload="reset_all(document.forms[0]);">
+	
+    <div>
+    	<div class="title">DIVEIN</div>
+    	<div><img src="/static/images/Jim&Lisa/header.jpg" width='400' height='120' style="float:left"></img></div>
+    	<div class="s-title">Divergence, Diversity,<br>Informative Sites and<br>Phylogenetic Analyses</div>
+    	<div><img src="/static/images/Jim&Lisa/KoHa-10_m.jpg" height='120' style="float:right"></img></div>
+    </div>
+    <div class="spacer"></div>  
+    <div class="navbar">
+		<a href='index.html' class="nav">Home</a>
+		<a href="insites.html" >Informative sites</a>
+		<a href="cot.html" >Center Of Tree</a>
+		<div class="dropdown">
+			<button class="dropbtn"><strong>Phylogeny/Divergence/Diversity</strong>
+			  <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-content">
+			  <a href="diver.html">PhyML 3.3.20220408</a>
+			  <a href="fasttree.html">FastTree 2.1.10</a>
+			  <a href="raxml.html">RAxML 8.2.12</a>
+			  <a href="hd.html">Hamming distance</a>
+			</div>
+	  	</div> 
+		<a href="tst.html" >Two-Sample Tests</a>
+		<a href="cluster.html" >Sequence clustering</a>
+		<a href="retrieve.html" >Retrieve results</a>
+		<a href='contact.html' >Contact</a>
+		<a href='help.html' >Help</a>
+  	</div>
+    <div id="indent">
+	<!-- maintainance message goes here -->
+    <!-- end of message -->
+    	<h2>Phylogeny/Divergence/Diversity by RAxML 8.2.12</h2>
+    	<form enctype='multipart/form-data' name="alignmentForm" method="post" onsubmit="return CheckRaxmlForm(this);">
+		<input type=hidden name='local' value='DIVEIN'>
+		<input type=hidden name='program' value='raxml'>
+		<div class='box'>
+    		<div id="title">
+				<span><strong>Data Input</strong></span>
+			</div>
+
+    		<div class='row'>
+    			<span class='label'>Upload sequence alignment file <a href="help.html#sequence"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='file' id='seqFile' name='seqFile'></span>
+<!--    			<span class='alignrightcol'><input type='radio' id='seqRadio3' name='seqRadio' value='nexus' onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype)">Nexus</span>  -->			
+    			<span class='alignrightcol'><input type='radio' id='seqRadio2' name='seqRadio' value='phylip' onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype)">Phylip</span>
+    			<span class='alignrightcol'><input type='radio' id='seqRadio1' name='seqRadio' value='fasta' checked onclick = "enable_field(this.form.seqFile); 
+    			enable_field(this.form.datatype)">Fasta</span>
+				<span class='alignrightcol'><input type='radio' id='seqRadio4' name='seqRadio' value='example' onclick = "remove_value(this.form.seqFile); 
+				disable_field(this.form.seqFile); disable_field(this.form.datatype); changeOptions('nt', 'subModel', 'raxml')">Example <a href='examples/seqFile'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Sequence data type <a href="help.html#datatype"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='datatype' name='datatype' onchange="changeOptions(this.value, 'subModel', 'raxml'); disable_field(this.form.ttText); disable_grpRadio(this.form.ttRadio);">
+    				<option value='' selected>-- Please select a data type --</option>	
+    				<option value='nt'>DNA</option>
+    				<option value='aa'>Protein</option>
+    				</select>
+    			</span>
+    		</div> 		
+    		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Substitution Model</strong></span>
+			</div>
+    		<div class='row'>
+    			<span class='label'>Substitution model <a href="help.html#model"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='subModel' name='subModel'>
+    				<option value='GTR' selected>GTR</option>
+    				<option value='HKY85'>HKY85</option>
+    				<option value='JC69'>JC69</option>
+    				<option value='K80' >K80</option>
+    				</select>
+    			</span>
+    		</div>
+<!--    		<div class='row'>
+    			<span class='label'>Number of substitution rate categories <a href="help.html#categories"><img src="image/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='catText' name='catText' value=20 size='25' onchange="disableGamma(this.value, this.form.gammaText, this.form.gammaRadio1, this.form.gammaRadio2)"></span>
+    			<span class='alignrightcol'>&nbsp;</span>
+    			<span class='alignrightcol'><input type='radio' id='rcRadio1' name='rcRadio' value='c' onclick = "disable_text(this.form.catText)">Constant</span>
+    			<span class='alignrightcol'><input type='radio' id='rcRadio2' name='rcRadio' value='v' checked onclick = "enable_text(this.form.catText)">Variable</span>
+    			
+    		</div>-->
+    		<div class='row'>
+    			<span class='label'>Model of rate heterogeneity hello<a href="help.html#ratehetero"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'></span>
+    			<span class='alignrightcol'>&nbsp;</span>    			
+    			<span class='alignrightcol'><input type='radio' id='gammaRadio1' name='gammaRadio' value='cat' >CAT</span>
+    			<span class='alignrightcol'><input type='radio' id='gammaRadio2' name='gammaRadio' value='gamma' checked >GAMMA</span>
+    		</div>
+    		<div class='spacer'>&nbsp;</div>
+<!--    		
+    		<div id="title">
+				<span><strong>Tree Searching</strong></span>
+			</div>
+    		<div class='row'>
+    			<span class='label'>Type of tree improvement <a href="help.html#treeImprovType"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='treeImprovType' name='treeImprovType'">
+    				<option value='NNI' selected>NNI</option>
+    				<option value='SPR'>SPR</option>
+    				<option value='BEST'>Best of NNI & SPR</option>
+    				</select>
+    			</span>
+    		</div>
+    		<div class='row'>
+    			<span class='label'>Optimise tree <a href="help.html#optimise"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><select id='optimise' name='optimise' onchange="handle_treeImprovType(this.value, this.form.treeImprovType)">
+    				<option value='tlr' selected>Topology + branch lengths</option>
+    				<option value='lr'>Branch lengths only</option>
+    				<option value='n'>None</option>
+    				</select>
+    			</span>
+    		</div>
+       		<div class='spacer'>&nbsp;</div>
+-->    		
+    		<div id="title">
+				<span><strong>Branch Support</strong></span>
+			</div>
+    		<div class='row'>
+    			<span class='label'>Perform bootstrap <a href="help.html#raxmlbs"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='bsText' name='bsText' value=100 size=10  disabled>&nbsp;</span>
+    			<span class='alignrightcol'>&nbsp;</span>    			
+    			<span class='alignrightcol'><input type='radio' id='bsRadio1' name='bsRadio' value='yes' onclick = "enable_text(this.form.bsText); 
+    			check_radio(this.form.diverRadio2); ">Yes</span>
+    			<span class='alignrightcol'><input type='radio' id='bsRadio2' name='bsRadio' value='no' checked onclick = "disable_text(this.form.bsText); 
+    			check_radio(this.form.diverRadio1); ">No</span>
+    		</div>
+    		<div class='spacer'>&nbsp;</div>
+    		
+    		<div id="title">
+				<span><strong>Divergence/Diversity measurements</strong>&nbsp;&nbsp;&nbsp;<font color=yellow>*Defining groups and selecting sequences for calculating divergence are on the next page, after you click "Submit & Email Results".</font></span>
+			</div>    		
+    		<div class='row'>
+    			<span class='label'>Calculate tree based divergence/diversity<a href="help.html#diverFormat"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'></span>
+    			<span class='alignrightcol'>&nbsp;</span>    			
+    			<span class='alignrightcol'><input type='radio' id='diverRadio1' name='diverRadio' value='yes' checked onclick = "disable_text(this.form.bsText); 
+    			check_radio(this.form.bsRadio2); ">Yes</span>
+    			<span class='alignrightcol'><input type='radio' id='diverRadio2' name='diverRadio' value='no' >No</span>
+    		</div>
+    		<div class='spacer'>&nbsp;</div>  		
+    		<div id="title">
+				<span><strong>Your Information</strong></span>
+			</div>
+			
+			<div class='row'>
+				<span class='label'>Your email <a href="help.html#email"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+				<span class='formw'><input type='text' name='email' size='25'></span>
+			</div>
+		</div>
+    	
+    	<div class='row' align=center>
+			<span><input type='submit' value=' Submit & Email Results ' size='25'></span>
+			<span><input type='button' value=' Reset ' onclick="window.location.href=window.location.href"></span>
+		</div>   	
+    	</form>
+    	<br>
+    	<div>
+    	<p style = "font-size: 12px"> When using RAxML please cite the following paper: A. Stamatakis, <a href="http://bioinformatics.oxfordjournals.org/content/early/2014/01/21/bioinformatics.btu033.abstract?keytype=ref&ijkey=VTEqgUJYCDcf0kP">RAxML Version 8: A tool for Phylogenetic Analysis 
+    	and Post-Analysis of Large Phylogenies</a>. In Bioinformatics, 2014.
+    	</p>
+		</div>
+	</div>
+	<div id="footer" align=center>
+		<p class="copyright">&copy; 2025 Fred Hutch Cancer Center. All rights reserved.</p>
+	</div>
+	<!-- mail server message goes here -->	
+	<!-- end of message -->
+</body>
+</html>
+
+
+

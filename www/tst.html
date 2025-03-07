@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Two-Sample Tests</title>
+	<link href='/static/css/divein.css' media="screen" rel="Stylesheet" type="text/css">
+	<script type="text/javascript" src='/static/js/divein.js'></script>	
+</head>
+<body>
+	
+    <div>
+    	<div class="title">DIVEIN</div>
+    	<div><img src="/static/images/Jim&Lisa/header.jpg" width='400' height='120' style="float:left"></div>
+    	<div class="s-title">Divergence, Diversity,<br>Informative Sites and<br>Phylogenetic Analyses</div>
+    	<div><img src="/static/images/Jim&Lisa/KoHa-90.jpg" height='120' style="float:right"></div>
+    </div>
+    <div class="spacer"></div>
+   	<div class="navbar">
+		<a href='index.html' class="nav">Home</a>
+		<a href="insites.html" >Informative sites</a>
+		<a href="cot.html" >Center Of Tree</a>
+		<div class="dropdown">
+			<button class="dropbtn">Phylogeny/Divergence/Diversity 
+			  <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-content">
+			  <a href="diver.html">PhyML 3.3.20220408</a>
+			  <a href="fasttree.html">FastTree 2.1.10</a>
+			  <a href="raxml.html">RAxML 8.2.12</a>
+			  <a href="hd.html">Hamming distance</a>
+			</div>
+	  	</div> 
+		<a href="tst.html" ><strong>Two-Sample Tests</strong></a>
+		<a href="cluster.html" >Sequence clustering</a>
+		<a href="retrieve.html" >Retrieve results</a>
+		<a href='contact.html' >Contact</a>
+		<a href='help.html' >Help</a>
+  	</div>
+    <div id="indent">
+    <!-- maintainance message goes here -->
+    <!-- end of message -->
+    	<h2>Two-Sample Tests -- Compare intra-individual genetic sequence diversity between populations</h2>
+    	<form enctype='multipart/form-data' action="/cgi-bin/tst/grp.cgi?" name="tstForm" method="post" onsubmit="return CheckTstForm(this);">
+    	<input type=hidden name='local' value='DIVEIN'>
+    	<div class='box'>
+    		<div id="title">
+				<span><strong>Pariwise Sequence Distance Data</strong></span>
+			</div>
+    		<div class='row'>
+			<span class='label'>Enter project ID of running Phylogeny/Divergence/Diversity <a href='help.html#diver_id'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+    			<span class='formw'><input type='text' id='projectId' name='projectId' onchange="remove_value(this.form.diveinFile); remove_value(this.form.userFile); remove_value(this.form.seqFile);
+			uncheck(this.form.diveinExampleCb); uncheck(this.form.userExampleCb); uncheck(this.form.seqExampleCb);"></span>
+			</div>
+			<div class='row'>
+					<span class='label'><strong>Or,</strong> upload pairwise distance file from DIVEIN output <a href="help.html#diver_dist"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+					<span class='formw'><input type='file' id='diveinFile' name='diveinFile' onchange="remove_value(this.form.projectId); remove_value(this.form.userFile);
+				uncheck(this.form.diveinExampleCb); uncheck(this.form.userExampleCb); uncheck(this.form.seqExampleCb);"></span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'><input type='checkbox' id='diveinExampleCb' name='diveinExampleCb' value='example' onclick = "remove_value(this.form.projectId);
+				remove_value(this.form.diveinFile); remove_value(this.form.userFile); remove_value(this.form.seqFile); uncheck(this.form.userExampleCb);
+				handle_seqExampleCb(this, this.form.seqExampleCb);">Example <a href='examples/tst_diveindistfile.txt'>
+				<img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span>
+			</div>
+			<div class='row'>
+					<span class='label'><strong>Or,</strong> upload column-formatted pairwise distance file <a href="help.html#usr_dist"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+					<span class='formw'><input type='file' id='userFile' name='userFile' onchange="remove_value(this.form.projectId); remove_value(this.form.diveinFile);
+				uncheck(this.form.diveinExampleCb); uncheck(this.form.userExampleCb); uncheck(this.form.seqExampleCb);"></span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'><input type='checkbox' id='userExampleCb' name='userExampleCb' value='example' onclick = "remove_value(this.form.projectId);
+				remove_value(this.form.diveinFile); remove_value(this.form.userFile); remove_value(this.form.seqFile); uncheck(this.form.diveinExampleCb);
+				handle_seqExampleCb(this, this.form.seqExampleCb);">Example <a href='examples/tst_distfile.txt'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span>
+			</div>
+			<div class='spacer'>&nbsp;</div>
+		
+			<div id="title">
+				<span><strong>Sequence Data</strong></span> (A fasta file of sequences that derived uploaded pairwise distance file is needed if you are uploading a pairwise distance file)</strong></span>
+			</div>
+		
+			<div class='row'>
+				<span class='label'>Upload sequence fasta file <a href="help.html#tst_fasta"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+				<span class='formw'><input type='file' id='seqFile' name='seqFile' onchange="uncheck(this.form.diveinExampleCb); uncheck(this.form.userExampleCb); uncheck(this.form.seqExampleCb);"></span>
+				<span class='alignrightcol'>&nbsp;</span>
+				<span class='alignrightcol'>&nbsp;</span>
+				<span class='alignrightcol'>&nbsp;</span>
+				<span class='alignrightcol'><input type='checkbox' id='seqExampleCb' name='seqExampleCb' value='example' onclick = "remove_value(this.form.seqFile); remove_value(this.form.projectId);
+			remove_value(this.form.diveinFile); remove_value(this.form.userFile);handle_distExampleCb(this, this.form.diveinExampleCb, this.form.userExampleCb);">Example <a href='examples/tst_seqFile.fas'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span>
+			</div>
+			<div class='spacer'>&nbsp;</div>  		
+    		<div id="title">
+				<span><strong>Your Information</strong></span>
+			</div>
+			
+			<div class='row'>
+				<span class='label'>Your email <a href="help.html#email"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+				<span class='formw'><input type='text' name='email' size='25'></span>
+			</div>
+		</div>
+    	
+    	<div class='row' align=center>
+		<span><input type='submit' value=' Submit '></span>
+		<span><input type='button' value=' Reset ' onclick="window.location.href=window.location.href"></span>
+		</div>
+	
+		<br>
+		<div>
+		<p style = "font-size: 12px">Please cite the following paper if you use Two-Sample Tests:</p> 
+		<p style = "font-size: 12px">Giorgi EE, Bhattacharya T. 2012 <a href=http://www.ncbi.nlm.nih.gov/pubmed/23004569>
+		A note on two-sample tests for comparing intra-individual genetic sequence diversity between populations.</a> Biometrics 68(4):1323-6
+		</p>
+		</div>
+    	</form>
+	</div>
+	<div id="footer" align=center>
+		<p class="copyright">&copy; 2025 Fred Hutch Cancer Center. All rights reserved.</p>
+	</div>
+	<!-- mail server message goes here -->	
+	<!-- end of message -->
+</body>
+</html>
+
+

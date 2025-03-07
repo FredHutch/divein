@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Phylogeny/Divergence/Diversity</title>
+	<link href='/static/css/divein.css' media="screen" rel="Stylesheet" type="text/css"></link>
+	<script type="text/javascript" src='/static/js/divein.js'></script>
+</head>
+<body>
+	
+    <div>
+    	<div class="title">DIVEIN</div>
+    	<div><img src="/static/images/Jim&Lisa/header.jpg" width='400' height='120' style="float:left"></img></div>
+    	<div class="s-title">Divergence, Diversity,<br>Informative Sites and<br>Phylogenetic Analyses</div>
+    	<div><img src="/static/images/Jim&Lisa/KoHa-10_m.jpg" height='120' style="float:right"></img></div>
+    </div>
+    <div class="spacer"></div>  
+    <div class="navbar">
+		<a href='index.html' class="nav">Home</a>
+		<a href="insites.html" >Informative sites</a>
+		<a href="cot.html" >Center Of Tree</a>
+		<div class="dropdown">
+			<button class="dropbtn"><strong>Phylogeny/Divergence/Diversity</strong>
+			  <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-content">
+			  <a href="diver.html">PhyML 3.3.20220408</a>
+			  <a href="fasttree.html">FastTree 2.1.10</a>
+			  <a href="raxml.html">RAxML 8.2.12</a>
+			  <a href="hd.html">Hamming distance</a>
+			</div>
+	  	</div> 
+		<a href="tst.html" >Two-Sample Tests</a>
+		<a href="cluster.html" >Sequence clustering</a>
+		<a href="retrieve.html" >Retrieve results</a>
+		<a href='contact.html' >Contact</a>
+		<a href='help.html' >Help</a>
+  	</div>
+    <div id="indent">
+	<!-- maintainance message goes here -->
+    <!-- end of message -->
+    	<h2>Hamming distance and diversity</h2>
+    	<form enctype='multipart/form-data' action="/cgi-bin/diver/hd_grp.cgi" name="alignmentForm" method="post" onsubmit="return CheckClusterForm(this);">
+		<input type=hidden name='local' value='DIVEIN'>
+		<input type=hidden name='program' value='hd'>
+		<div class='box'>
+    		<div id="title">
+				<span><strong>Data Input</strong>&nbsp;&nbsp;&nbsp;<!--<font color=yellow>*Uploaded sequences are secure in our server and will be deleted after the job is finished.</font>--></span>
+			</div>
+
+			<div class='row'>
+					<span class='label'>Upload sequence alignment fasta file <a href="help.html#seqinput"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+					<span class='formw'><input type='file' id='seqFile' name='seqFile' onchange="uncheck(this.form.seqExampleCb); "></span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'>&nbsp;</span>
+					<span class='alignrightcol'><input type='checkbox' id='seqExampleCb' name='seqExampleCb' value='example' onclick = "remove_value(this.form.seqFile); ">Example <a href='examples/alignFile.fas'><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span>
+			</div>
+					
+    		<div class='spacer'>&nbsp;</div>
+    				
+    		<div id="title">
+				<span><strong>Your Information</strong></span>
+			</div>
+			
+			<div class='row'>
+				<span class='label'>Your email address <a href="help.html#email"><img src="/static/images/Jim&Lisa/bubble_questionmark.jpg" class="questionmark"></a></span> 
+				<span class='formw'><input type='text' name='email' size='20'></span>
+			</div>
+		</div>
+    	
+    	<div class='row' align=center>
+			<span><input type='submit' value=' Submit & Email Results ' size='25'></span>
+			<span><input type='button' value=' Reset ' onclick="window.location.href=window.location.href"></span>
+		</div>   	
+    	</form>
+	</div>
+	<div id="footer" align=center>
+		<p class="copyright">&copy; 2025 Fred Hutch Cancer Center. All rights reserved.</p>
+	</div>
+	<!-- mail server message goes here -->	
+	<!-- end of message -->
+</body>
+</html>
+
+

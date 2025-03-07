@@ -1,0 +1,837 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>DIVEIN Help</title>
+	<link href='/static/css/divein.css' media="screen" rel="Stylesheet" type="text/css">
+	<script type="text/javascript" src='/static/js/divein.js'></script>
+</head>
+<body>
+	
+    <div>
+    	<div class="title">DIVEIN</div>
+    	<div><img src="/static/images/Jim&Lisa/header.jpg" width='400' height='120' style="float:left"></div>
+    	<div class="s-title">Divergence, Diversity,<br>Informative Sites and<br>Phylogenetic Analyses</div>
+    </div>
+    <div class="spacer"></div>
+    <div class="navbar">
+		<a href='index.html' class="nav">Home</a>
+		<a href="insites.html" >Informative sites</a>
+		<a href="cot.html" >Center Of Tree</a>
+		<div class="dropdown">
+			<button class="dropbtn">Phylogeny/Divergence/Diversity 
+			  <i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-content">
+			  <a href="diver.html">PhyML 3.3.20220408</a>
+			  <a href="fasttree.html">FastTree 2.1.10</a>
+			  <a href="raxml.html">RAxML 8.2.12</a>
+			  <a href="hd.html">Hamming distance</a>
+			</div>
+	  	</div> 
+		<a href="tst.html" >Two-Sample Tests</a>
+		<a href="cluster.html" >Sequence clustering</a>
+		<a href="retrieve.html" >Retrieve results</a>
+		<a href='contact.html' >Contact</a>
+		<a href='help.html' ><strong>Help</strong></a>
+  	</div>
+    
+    <!--<div id='wrap'>-->
+    <div id="indent">
+<h2 align=center>DIVEIN Help</h2>
+
+<dl>
+<dt><p><b><a class='black' name=sequence>1. Sequence alignment</a></b>
+<dd><p><b><a class='black' name=sequence>1.1 Formats</a></b>
+<dd>
+<p>
+The input nucleotide or amino-acid sequences must be aligned. DIVEIN accepts two types 
+of sequence files, which are fasta and phylip.
+The sequence data set could be in either sequential or interleaved format. The name of sequences <strong>MUST NOT</strong> contain 
+any whitespace characters (tab or space). It is recommended that the sequence name is comprised of alphabetical characters, digits 
+or underscore. The program will replace any other characters with underscore "_".
+<dd>
+<p>
+Example of phylip file in sequential format:
+<pre>
+12 150
+092398_316    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+092398_339    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+092398_315    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+092398_317    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+092398_312    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+082599_889    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACTCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+082599_894    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCCAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACGACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+082599_896    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+082599_916    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+082599_917    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+ML1365_1      GAAGAAGAGGTAATAATTAGATCACAAAATTTCACAGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+ML1365_2      GAAGAAGAGGTAATAATTAGATCACAAAATTTCACAGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACAAATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+</pre>
+<p>
+Example of phylip file in interleaved format:
+<pre>
+12 150
+092398_316    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+092398_339    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+092398_315    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+092398_317    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+092398_312    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+082599_889    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+082599_894    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCCAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+082599_896    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+082599_916    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+082599_917    GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+ML1365_1      GAAGAAGAGGTAATAATTAGATCACAAAATTTCACAGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+ML1365_2      GAAGAAGAGGTAATAATTAGATCACAAAATTTCACAGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACTCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACGACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+</pre>
+<p>
+Example of fasta file:
+<pre>
+>092398_316    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>092398_339    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>092398_315    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>092398_317    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>092398_312    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>082599_889    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACTCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>082599_894    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCCAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACGACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>082599_896    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>082599_916    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>082599_917    
+GAAGAAGAGGTAATAATTAGATCACAGAATTTCACGGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>ML1365_1      
+GAAGAAGAGGTAATAATTAGATCACAAAATTTCACAGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+>ML1365_2      
+GAAGAAGAGGTAATAATTAGATCACAAAATTTCACAGACAATGCTAAAACCATATTAGTACAGCTGAATGAAACTGTACA
+AATTAATTGTACAAGACCCAACAACAATACAAGAAAAAGCATACATATAGCACCAGGGAGAGCATTTTAT
+</pre>
+
+<dd><p><b><a class='black' name=datatype>1.2 Data type</a></b>
+<dd>
+<p>
+DNA or amino-acid. You must select correct data type for your sequence alignment file.
+
+<dt><p><b>2. Informative Sites</a></b>
+<dd><p><b><a class='black' name=insites_input>2.1 Inputs</a></b>
+<ul>
+<p><li><a class='black' name=reference>Sequence alignment file in one of two formats: Phylip and Fasta.</a>
+<p><li><a class='black' name=datatype>Sequence data type.</a>
+<p><li><a class='black' name=reference>Define reference sequence and/or groups (optional)</a>
+<dd>
+<img src="/static/images/insites_group.png">
+<p>From the interface above user has options to define a reference sequence and/or group(s) of sequences of his wish.
+If a reference sequence is defined, DIVEIN will use it to detect informative and private sites in the alignment.
+If there is no reference sequence defined, DIVEIN will calculate the consensus sequence and use it as a reference 
+to detect informative sites. If sequence group(s) are defined, DIVEIN will calculate informative sites based on 
+each group.</p>
+</ul>
+<dd><p><b>2.2 Outputs</b></p>
+<ul>
+<li><p>Aligned informative sites: An output file where all detected informative sites are aligned.</li>
+<p>Example of aligned informative sites:</p>
+<pre>
+                1334579
+               85120394
+
+Consensus      CGGGGGAA
+Dec03_1        ....T..C
+Dec03_2        ....TAC.
+Dec03_3        ........
+Dec03_4        GA......
+Dec03_5        GA......
+Mar04_1        ....T..C
+Mar04_2        G.TT....
+Mar04_7        .....AC.
+Mar04_8        ........
+Mar04_9        ..TT....
+</pre>
+<li><p>Tab-delimited informative sites & summary: A tab-delimited output file containing all detected informative sites and summary of informative sites.</li>
+<p>Example of tab-delimited informative sites & summary:</p>
+<pre>
+         	Total_informative	Informative(noGaps)	     	 8	15	31	32	40	53	79	94
+Consensus	                0	                  0	     	 C	 G	 G	 G	 G	 G	 A	 A
+Dec03_1  	                2	                  2	     	 .	 .	 .	 .	 T	 .	 .	 C
+Dec03_2  	                3	                  3	     	 .	 .	 .	 .	 T	 A	 C	 .
+Dec03_3  	                0	                  0	     	 .	 .	 .	 .	 .	 .	 .	 .
+Dec03_4  	                2	                  2	     	 G	 A	 .	 .	 .	 .	 .	 .
+Dec03_5  	                2	                  2	     	 G	 A	 .	 .	 .	 .	 .	 .
+Mar04_1  	                2	                  2	     	 .	 .	 .	 .	 T	 .	 .	 C
+Mar04_2  	                3	                  3	     	 G	 .	 T	 T	 .	 .	 .	 .
+Mar04_7  	                2	                  2	     	 .	 .	 .	 .	 .	 A	 C	 .
+Mar04_8  	                0	                  0	     	 .	 .	 .	 .	 .	 .	 .	 .
+Mar04_9  	                2	                  2	     	 .	 .	 T	 T	 .	 .	 .	 .
+
+Alignment	                8	                  8
+         	                 	                   	    A	 0	 2	 0	 0	 0	 2	 8	 8
+         	                 	                   	    C	 7	 0	 0	 0	 0	 0	 2	 2
+         	                 	                   	    G	 3	 8	 8	 8	 7	 8	 0	 0
+         	                 	                   	    T	 0	 0	 2	 2	 3	 0	 0	 0
+         	                 	                   	Total	10	10	10	10	10	10	10	10
+</pre>
+<li><p>Aligned private sites: An output file where all detected private sites are aligned.</li>
+<p>Example of aligned private sites:</p>
+<pre>
+                359
+               5008
+
+Consensus      GGAA
+Dec03_1        ....
+Dec03_2        ....
+Dec03_3        ....
+Dec03_4        ....
+Dec03_5        ....
+Mar04_1        ....
+Mar04_2        .C..
+Mar04_7        ...G
+Mar04_8        A.G.
+Mar04_9        .T..
+</pre>
+<li><p>Tab-delimited private sites & summary: A tab-delimited output file containing all detected private sites and summary of private sites.</li>
+<p>Example of tab-delimited private sites & summary:</p>
+<pre>
+         	Total_private	Private(noGaps)	     	 5	30	50	98
+Consensus	            0	              0	     	 G	 G	 A	 A
+Dec03_1  	            0	              0	     	 .	 .	 .	 .
+Dec03_2  	            0	              0	     	 .	 .	 .	 .
+Dec03_3  	            0	              0	     	 .	 .	 .	 .
+Dec03_4  	            0	              0	     	 .	 .	 .	 .
+Dec03_5  	            0	              0	     	 .	 .	 .	 .
+Mar04_1  	            0	              0	     	 .	 .	 .	 .
+Mar04_2  	            1	              1	     	 .	 C	 .	 .
+Mar04_7  	            1	              1	     	 .	 .	 .	 G
+Mar04_8  	            2	              2	     	 A	 .	 G	 .
+Mar04_9  	            1	              1	     	 .	 T	 .	 .
+
+Alignment	            4	              4
+         	             	               	    A	 1	 0	 9	 9
+         	             	               	    C	 0	 1	 0	 0
+         	             	               	    G	 9	 8	 1	 1
+         	             	               	    T	 0	 1	 0	 0
+         	             	               	Total	10	10	10	10
+</pre>
+</ul>
+
+<dt><p><b>3. Center of Tree</a></b>
+<dd><p><b>3.1 Inputs</b>
+<ul>
+<p><li><a class='black' name=reference>Sequence alignment file in one of two formats: Phylip and Fasta.</a>
+<p><li><a class='black' name=datatype>Sequence data type.</a>
+<p><li><a class='black' name=tree>Newick tree file (optional)</a>
+<dd>
+A text file contains a newick tree. Users can provide their own tree to reconstruct the COT tree and sequence.
+If branch lengths are associated with input tree, HyPhy will ignore them and estimate branch lengths.
+If a tree file is not provided, DIVEIN will calculate tree first and then reconstruct the COT based on the estimated tree.</dd>
+<p><li><a class='black' name=email>Your email address</a>
+</ul>
+</p>
+<dd><p><b>3.2 Outputs</a></b>
+<ul>
+<li>Estimated phylogenetic tree (If a tree is not provided)
+<ul>
+A newick tree estimated by FastTree under the GTR (DNA) or LG (amino acid) substitution model. The tree can be viewed through the Archaeopteryx Java applet.
+</ul>
+<p>
+<li>Estimated evolutionary parameters (If a tree is not provided)
+<ul>
+A set of evolutionary parameters estimated by FastTree.
+</ul>
+<p>
+<li>COT tree
+<ul>
+A newick tree reconstructed and re-rooted at COT by HyPhy. The tree can be viewed through the Archaeopteryx Java applet.
+</ul>
+<p>
+<li>COT sequence
+<ul>
+COT sequence reconstructed by HyPhy under GTR (DNA) or LG (amino acid) substitution model.<br><br>
+</ul>
+</ul>
+<div align=center>
+<p>Initial tree:
+<img width=400 height=400 src="/static/images/initial_tree.png">
+&nbsp;&nbsp;&nbsp;
+COT re-rooted tree:
+<img width=400 height=400 src="/static/images/cot_tree.png">
+</div>
+
+<dt><p><b><a class='black' name=diver>4. Phylogeny/Divergence/Diversity</a></b>
+<dd>
+<p>
+Users can perform Maximum Likelihood (ML) estimation alone or include divergence/diversity analyses through three programs (FastTree, RAxML and PhyML). 
+They can select to calculate divergence from any or all of: MRCA, COT, consensus, or any sequence in the alignment. 
+
+<dd><p><b><a class='black' name=diver_inputs>4.1 Inputs</a></b>
+<ul>
+<p><li><a class='black' name=reference>Sequence alignment file in one of two formats: Phylip and Fasta.</a>
+<p><li><a class='black' name=datatype>Sequence data type.</a>
+<p><li><a class='black' name=model>Substitution model</a>
+<ul>
+A nucleotide or amino-acid substitution model. DIVEIN implements a wide range of substitution models.
+<ul><li>PhyML: GTR (default) [<a href=#1>1</a>,<a href=#2>2</a>],
+JC69 [<a href=#3>3</a>], K80 [<a href=#4>4</a>], F81 [<a href=#5>5</a>], HKY85 [<a href=#6>6</a>] and TN93 [<a href=#7>7</a>] for nucleotide sequences;  
+LG (default) [<a href=#8>8</a>], HIVbetween [<a href=#9>9</a>], HIVwithin [<a href=#9>9</a>], WAG [<a href=#10>10</a>], Dayhoff [<a href=#11>11</a>], 
+JTT [<a href=#12>12</a>], Blosum62 [<a href=#13>13</a>], mtREV [<a href=#14>14</a>], rtREV [<a href=#15>15</a>], cpREV [<a href=#16>16</a>], 
+DCMut [<a href=#17>17</a>], VT [<a href=#18>18</a>], MtArt [<a href=#19>19</a>] and MtMAM [<a href=#20>20</a>] for amino-acid sequences.
+<li>FastTree: GTR (default), Jukes-Cantor for nucleotide sequences. LG (default), WAG, JTT for amino acid sequences.
+<li>RAxML: GTR (default), HKY85, JC69, K80 for nucleotide sequences. LG (default), WAG, JTT, BLOSUM62, CPREV, DAYHOFF, DCMUT, HIVB, HIVW, 
+MTART, MTMAM, MTREV, RTREV, VT for amino acid sequences.
+</ul></ul>
+<p><li><a class='black' name=phyml>For PhyML:</a>
+<ul>
+<p>
+<li><a class='black' name=seed>Job seed</a>
+<ul>
+A number used to initiate the random number generator for the analysis you launched. Must be an integer. If user does not provide a seed for their analysis, 
+DIVEIN will create a random seed to run PhyML. User can use the same seed to reproduce the analysis.
+</ul>
+<p>
+<li><a class='black' name=frequency>Equilibrium frequencies</a>
+<ul>
+Nucleotide or amino-acid frequencies. They can be optimized (default) or empirical. </ul>
+<ul>
+Optimized:
+<ul>
+Nucleotide sequences: the equilibrium base frequencies are estimated using maximum likelihood.
+</ul>
+<ul>
+Amino-acid sequences: the equilibrium amino-acid frequencies are estimated using the frequencies defined by the substitution model.
+</ul>
+Empirical:
+<ul>
+Nucleotide sequences: the equilibrium base frequencies are estimated by counting the occurence of the different bases in the alignment.
+</ul>
+<ul>
+Amino-acid sequences: the equilibrium amino-acid freauencies are estimated by counting the occurence of the different amino-acids in the alignment.
+</ul></ul>
+<p>
+<li><a class='black' name=ttratio>Transition/transversion ratio</a>
+<ul>
+Can be fixed with a positive value (default 4.0) or estimated in the maximum likelihood framework. The later makes the program slower. 
+This option is DNA sequences only under HKY85, K80 and TN93 substitution models. The definition of the transition/transversion ratio 
+is the same as in PAML [<a href=#21>21</a>]. In PHYLIP, 
+the "transition/transversion rate ratio" is used instead. 4.0 in PHYML roughly corresponds to 2.0 in PHYLIP.
+</ul>
+<p>
+<li><a class='black' name=proportion>Proportion of invariable sites</a>
+<ul>
+The proportion of invariable sites, i.e., the expected frequency of sites that do not evolve, can be fixed to any value in the 0.0-1.0 range 
+or estimated (default) from the data in the maximum-likelihood framework. The latter makes the program slower.
+</ul>
+<p>
+<li><a class='black' name=categories>Number of substitution rate categories</a>
+<ul>
+The different categories correspond to different rates of evolution from site to site. A discrete-gamma distribution is used to account for 
+variation in substitution rates among sites, where the number of categories that defines this distribution can be supplied by the user. 
+The larger this number, the better is the goodness-of-fit as compared to the continuous distribution. The number of categories of this 
+distribution is set to 4 by default, in this case the likelihood of the phylogeny at one site is averaged over four conditional likelihoods 
+corresponding to four rates and the computation of the likelihood is four times slower than with a single rate. Values for number of categories 
+fewer than four or greater than eight are not recommended. In the first case, the discrete distribution is a poor approximation of the continuous 
+one. In the second case, the computational burden becomes high and a higher number of categories is not likely to enhance the accuracy of phylogeny 
+estimation. 
+</ul>
+<p>
+<li><a class='black' name=gamma>Gamma distribution parameter</a>
+<ul>
+The shape of the gamma distribution determines the range of rate variation across sites. This option is used when having more than 1 substitution 
+rate category. Small values, typically in 0.1-1.0 range, correspond to large variability. The higher its value, the lower the variation of 
+substitution rates among sites. The gamma shape parameter can be fixed by the user or estimated (default) via maximum likelihood.
+</ul>
+<!--
+<dt><p><b><a class='black' name=starttree>Starting tree(s)</a></b>
+<dd>
+<p>
+Used as the starting tree(s) to be refined by the maximum likelihood algorithm. 
+DIVER use a BIONJ distance-based tree as a starting tree by default. 
+
+<p>
+<li><a class='black' name=treeImprovType>Type of tree improvement</a>
+<ul>
+There are three options to estimate tree topologies. The default approach is to use simultaneous NNI [<a href=#22>22</a>]. The second approach relies on
+subtree pruning and regrafting (SPR) [<a href=#23>23</a>]. It generally finds better tree topologies compared to NNI but is also significantly slower. The third 
+approach, Best of NNI & SPR, simply estimates the phylogeny using both methods and returns the best solution of the two.
+</ul>
+-->
+<p>
+<li><a class='black' name=optimise>Optimize tree topology, branch lengths and substitution rate parameters</a>
+<ul>
+By default all three options are optimised in order to maximise the likelihood. There are different combinations that user can choose to optimise.
+</ul>
+<p>
+<li><a class='black' name=bootstrap>Perform bootstrap and Number of bootstrap replicates</a>
+<ul>
+DIVEIN generates bootstrapped pseudo data sets from the original data set using PhyML, then returns the bootstrap tree 
+with branch lengths and bootstrap values, using standard NEWICK format. Note that the bootstrap analysis is a time 
+consuming process. The maximum number of bootstrapping replicates is set to 100 because of computational resource limitations.
+</ul>
+<p>
+<li><a class='black' name=aLRT>Compute aLRT</a>
+<ul>
+Approximate likelihood-ratio test (aLRT) [<a href=#24>24</a>] is a statistical test to compute branch supports, which is presented as a competitive alternative to 
+nonparametric bootstrap analysis of branch support. It applies to every (internal) branch and is computed along PhyML run on the original data set. 
+Thus, aLRT is much faster than standard bootstrap which requires running PhyML 100-1000 times with resampled data sets. As with any test, 
+the aLRT branch support is significant when it is larger than 0.90-0.99. With good quality data (enough signal and sites), the sets of branches 
+with bootstrap proportion > 0.75 and aLRT > 0.9 (SH-like option) tend to be similar. There are three branch supports are available:
+<ol>
+<li>aLRT statistics
+<li>aLRT parametric (Chi2-based) branch support
+<li>aLRT non-parametric branch support based on a Shimodaira-Hasegawa-like (SH-like) procedure
+<li>aLRT approximate Bayes branch support
+</ol>
+Default is aLRT approximate Bayes branch support.
+</ul></ul>
+
+<p><li><a class='black' name=fasttree>For FastTree:</a>
+<ul>
+<p>
+<li><a class='black' name=subratecat>Number of substitution rate categories</a>
+<ul>
+By default, FastTree accounts for variable rates of evolution across sites by assigning each site to one of 20 categories, 
+with the rates geometrically spaced from 0.05 to 20. FastTree sets each site to its most likely category by using a Bayesian approach 
+with a gamma prior. This prevents overfitting on small alignments.
+</ul>
+<p>
+<li><a class='black' name=gammadis>Discrete gamma distribution</a>
+<ul>
+FastTree reports the likelihood under the discrete gamma model with 20 rate categories ("Gamma20"). 
+The discrete gamma distribution is a standard approximation for accounting for the different rates of evolution at different sites 
+and for uncertainty in these rates. More precisely, after optimizing the tree with a fixed rate for each site (the CAT model), 
+FastTree will rescale the tree to optimize the Gamma20 likelihood.
+</ul>
+<p>
+<li><a class='black' name=shtest>Shimodaira-Hasegawa test for local support values</a>
+<ul>
+To quickly estimate the reliability of each split in the tree, FastTree uses the Shimodaira-Hasegawa test on 
+the three alternate topologies (NNIs) around that split.</ul></ul>
+
+<p><li><a class='black' name=raxml>For RAxML:</a>
+<ul>
+<p>
+<li><a class='black' name=ratehetero>Model of rate heterogeneity</a>
+<ul>
+<li>
+GAMMA [<a href=#21>21</a>]: RAxML always uses 4 discrete rate categories to approximate Gamma distribution of rate heterogeneity.
+</li></ul>
+<ul>
+<li>
+CAT [<a href=#26>26</a>]: In general, the CAT approximation of rate heterogeneity works very well on datasets with morethan 50 taxa for conducting tree searches 
+under a model that accommodates rate heterogeneity among sites. In other words, if you score the trees obtained under CAT using GAMMA you  
+will usually obtain equally good trees as with full searches under GAMMA at a substantially lower computational cost. Also, GAMMA may not 
+work for numerical reasons on very large trees with more than 10,000 taxa.
+</li></ul>
+<p>
+<li><a class='black' name=raxmlbs>Perform bootstrap</a>
+<ul>
+RAxML implements the standard non-parametric bootstrap and also the so-called rapid bootstrap [<a href=#25>25</a>], 
+which is a standard bootstrap search that relies on algorithmic shortcuts and approximations to speed up the search process.
+</ul></ul>
+
+<p>
+<li><a class='black' name=diverFormat>Calculate divergence/diversity based on tree or pairwise distances</a></b>
+<ul>
+Users are allowed to specify whether divergence and diversity are calculated as tree-based (patristic) distances or genetic distances (not 
+conditioned on a tree topology) or both.
+</ul>
+<p>
+<li><a class='black' name=email>Your email</a>
+<ul>
+Users must provide a valid email address to receive the result. Within the result email is a link to the analysis results.
+</ul>
+<p><li><a class='black'>Define sequence(s) to calculate divergence from the sequence(s) and/or designate sequences into groups (optional)</a>
+<dd>
+<p><img src="/static/images/diver_group.png">
+<p>From the interface above, user has options to define one or more sequences to calculate divergence from the 
+defined sequences (MRCA, COT, consensus and any sequences in alignment), and/or to designate sequences into different groups at his wish. If user wants to calculate 
+divergence from MRCA, he has to define outgroup sequence(s). If ingroups are defined, diversity and divergence 
+are calculated based on each ingroup.</p>
+</ul>
+<p>
+<dd><p><b><a class='black' name=layouts>4.2 Outputs</a></b>
+
+
+<ul>
+<!--<p>When an analysis is finished, a link is sent to the user by email to view and download results.</p>-->
+<p>When an analysis is finished, a link is sent to the user by email to view and download results. Users can locally visualize and edit phylogenetic trees and 
+dynamically generate and download graphs of distance distribution histograms and divergence and diversity (if applicable). Screen shots of DIVEIN output 
+of phylogeney/divergence/diversity analyses are shown in the figure below.</p>
+<p><img width=1000 src="/static/images/Figure1.png">
+
+<p>Screen shots of phylogeny/divergence/diversity output in DIVEIN. (A) Parameter settings for running the program. 
+(B) Phylogenetic tree viewed through the Archaeopteryx Java applet. (C) Estimated evolutionary parameters. (D) Reconstructed MRCA sequence. 
+(E) Summarized distances between groups. (F) Summarized divergence from MRCA for each group. 
+(G) Divergence plot generated by clicking the Draw divergence chart button. (H) Summarized diversity for each group. 
+(I) Diversity plot generated by clicking the Draw diversity chart button . (J) Distance matrix. 
+(K) Distance distribution histogram generated by clicking the Draw histogram button.
+
+</ul>
+
+<dt><p><b><a class='black' name=tst>5. Two-Sample Tests</a></b>
+<dd><p><b><a class='black' name=tst_input>5.1 Inputs</a></b>
+<ul>
+<p><li><a class='black' name=diver_id>Project ID of running Phylogeny/Divergence/Diversity,</a>
+<p><li><a class='black' name=diver_dist>Or, pairwise distance file form Phylogeny/Divergence/Diversity output,</a>
+<ul>
+A text file contains five tab delimited columns: column 1 and 2 are group information from DIVEIN, column 3 and 4 are sequence names, 
+column 5 is the distance between sequences in column 3 and 4.<br><br>
+<p>Example:
+<pre>
+sample1	sample1	sample1_1	sample1_2	0.01637381
+sample1	sample1	sample1_1	sample1_3	0.00487810
+sample1	sample1	sample1_1	sample1_4	0.00980428
+sample1	sample1	sample1_1	sample1_5	0.00814550
+sample1	sample1	sample1_1	sample1_6	0.01822976
+sample1	sample1	sample1_1	sample1_7	0.01970637
+sample1	sample1	sample1_1	sample1_8	0.01986091
+sample1	sample1	sample1_1	sample1_9	0.02138145
+sample1	sample1	sample1_1	sample1_10	0.01637298
+sample1	sample1	sample1_2	sample1_3	0.01472954
+sample1	sample1	sample1_2	sample1_4	0.01974077
+sample1	sample1	sample1_2	sample1_5	0.01807237
+sample1	sample1	sample1_2	sample1_6	0.02470691
+sample1	sample1	sample1_2	sample1_7	0.02472565
+sample1	sample1	sample1_2	sample1_8	0.02635346
+sample1	sample1	sample1_2	sample1_9	0.02641488
+sample1	sample1	sample1_2	sample1_10	0.02472565
+sample1	sample1	sample1_3	sample1_4	0.00815682
+sample1	sample1	sample1_3	sample1_5	0.00650614
+sample1	sample1	sample1_3	sample1_6	0.01636412
+sample1	sample1	sample1_3	sample1_7	0.01803690
+sample1	sample1	sample1_3	sample1_8	0.01822346
+sample1	sample1	sample1_3	sample1_9	0.01970637
+sample1	sample1	sample1_3	sample1_10	0.01478813
+sample1	sample1	sample1_4	sample1_5	0.01144043
+sample1	sample1	sample1_4	sample1_6	0.02146014
+sample1	sample1	sample1_4	sample1_7	0.02309267
+sample1	sample1	sample1_4	sample1_8	0.02314722
+sample1	sample1	sample1_4	sample1_9	0.02474853
+sample1	sample1	sample1_4	sample1_10	0.01982461
+sample1	sample1	sample1_5	sample1_6	0.01989424
+sample1	sample1	sample1_5	sample1_7	0.02145289
+sample1	sample1	sample1_5	sample1_8	0.02150356
+sample1	sample1	sample1_5	sample1_9	0.02310453
+sample1	sample1	sample1_5	sample1_10	0.01822753
+sample1	sample1	sample1_6	sample1_7	0.00814550
+sample1	sample1	sample1_6	sample1_8	0.01475515
+sample1	sample1	sample1_6	sample1_9	0.01805260
+sample1	sample1	sample1_6	sample1_10	0.01472476
+sample1	sample1	sample1_7	sample1_8	0.01636654
+sample1	sample1	sample1_7	sample1_9	0.01635010
+sample1	sample1	sample1_7	sample1_10	0.01634613
+sample1	sample1	sample1_8	sample1_9	0.01968165
+sample1	sample1	sample1_8	sample1_10	0.01306167
+sample1	sample1	sample1_9	sample1_10	0.00650148
+sample1	sample2	sample1_1	sample2_1	0.04150894
+sample1	sample2	sample1_1	sample2_2	0.04481757
+sample1	sample2	sample1_1	sample2_3	0.04118581
+sample1	sample2	sample1_1	sample2_4	0.04270911
+sample1	sample2	sample1_1	sample2_5	0.04747813
+sample1	sample2	sample1_2	sample2_1	0.05057603
+sample1	sample2	sample1_2	sample2_2	0.05171311
+sample1	sample2	sample1_2	sample2_3	0.04812485
+sample1	sample2	sample1_2	sample2_4	0.04961091
+sample1	sample2	sample1_2	sample2_5	0.05477126
+sample1	sample2	sample1_3	sample2_1	0.03972601
+sample1	sample2	sample1_3	sample2_2	0.04303673
+sample1	sample2	sample1_3	sample2_3	0.03941800
+sample1	sample2	sample1_3	sample2_4	0.04094676
+sample1	sample2	sample1_3	sample2_5	0.04565166
+sample1	sample2	sample1_4	sample2_1	0.04504876
+sample1	sample2	sample1_4	sample2_2	0.04836577
+sample1	sample2	sample1_4	sample2_3	0.04469536
+sample1	sample2	sample1_4	sample2_4	0.04620262
+sample1	sample2	sample1_4	sample2_5	0.05131233
+sample1	sample2	sample1_5	sample2_1	0.04334661
+sample1	sample2	sample1_5	sample2_2	0.04666904
+sample1	sample2	sample1_5	sample2_3	0.03936277
+sample1	sample2	sample1_5	sample2_4	0.04289655
+sample1	sample2	sample1_5	sample2_5	0.04391926
+sample1	sample2	sample1_6	sample2_1	0.03786664
+sample1	sample2	sample1_6	sample2_2	0.03934172
+sample1	sample2	sample1_6	sample2_3	0.02892074
+sample1	sample2	sample1_6	sample2_4	0.03903859
+sample1	sample2	sample1_6	sample2_5	0.03833404
+sample1	sample2	sample1_7	sample2_1	0.03951028
+sample1	sample2	sample1_7	sample2_2	0.03750406
+sample1	sample2	sample1_7	sample2_3	0.02690821
+sample1	sample2	sample1_7	sample2_4	0.03726187
+sample1	sample2	sample1_7	sample2_5	0.03646500
+sample1	sample2	sample1_8	sample2_1	0.03783088
+sample1	sample2	sample1_8	sample2_2	0.03930404
+sample1	sample2	sample1_8	sample2_3	0.03572278
+sample1	sample2	sample1_8	sample2_4	0.03556032
+sample1	sample2	sample1_8	sample2_5	0.04008926
+sample1	sample2	sample1_9	sample2_1	0.03780811
+sample1	sample2	sample1_9	sample2_2	0.03577112
+sample1	sample2	sample1_9	sample2_3	0.03227438
+sample1	sample2	sample1_9	sample2_4	0.02861559
+sample1	sample2	sample1_9	sample2_5	0.03652437
+sample1	sample2	sample1_10	sample2_1	0.03085127
+sample1	sample2	sample1_10	sample2_2	0.03232153
+sample1	sample2	sample1_10	sample2_3	0.02863239
+sample1	sample2	sample1_10	sample2_4	0.02520516
+sample1	sample2	sample1_10	sample2_5	0.03298780
+sample2	sample2	sample2_1	sample2_2	0.02901092
+sample2	sample2	sample2_1	sample2_3	0.02746596
+sample2	sample2	sample2_1	sample2_4	0.03952009
+sample2	sample2	sample2_1	sample2_5	0.02976398
+sample2	sample2	sample2_2	sample2_3	0.02367655
+sample2	sample2	sample2_2	sample2_4	0.04098195
+sample2	sample2	sample2_2	sample2_5	0.02796319
+sample2	sample2	sample2_3	sample2_4	0.03345440
+sample2	sample2	sample2_3	sample2_5	0.01876146
+sample2	sample2	sample2_4	sample2_5	0.03091119
+</pre>
+</ul>
+<p><li><a class='black' name=usr_dist>Or, column-formatted pairwise distance file.</a>
+<ul>
+A text file contains three tab delimited columns: column 1 and 2 are sequence names, 
+column 3 is the distance between sequences in column 1 and 2.<br><br>
+<p>Example:
+<pre>
+sample1_1	sample1_2	0.01637381
+sample1_1	sample1_3	0.00487810
+sample1_1	sample1_4	0.00980428
+sample1_1	sample1_5	0.00814550
+sample1_1	sample1_6	0.01822976
+sample1_1	sample1_7	0.01970637
+sample1_1	sample1_8	0.01986091
+sample1_1	sample1_9	0.02138145
+sample1_1	sample1_10	0.01637298
+sample1_2	sample1_3	0.01472954
+sample1_2	sample1_4	0.01974077
+sample1_2	sample1_5	0.01807237
+sample1_2	sample1_6	0.02470691
+sample1_2	sample1_7	0.02472565
+sample1_2	sample1_8	0.02635346
+sample1_2	sample1_9	0.02641488
+sample1_2	sample1_10	0.02472565
+sample1_3	sample1_4	0.00815682
+sample1_3	sample1_5	0.00650614
+sample1_3	sample1_6	0.01636412
+sample1_3	sample1_7	0.01803690
+sample1_3	sample1_8	0.01822346
+sample1_3	sample1_9	0.01970637
+sample1_3	sample1_10	0.01478813
+sample1_4	sample1_5	0.01144043
+sample1_4	sample1_6	0.02146014
+sample1_4	sample1_7	0.02309267
+sample1_4	sample1_8	0.02314722
+sample1_4	sample1_9	0.02474853
+sample1_4	sample1_10	0.01982461
+sample1_5	sample1_6	0.01989424
+sample1_5	sample1_7	0.02145289
+sample1_5	sample1_8	0.02150356
+sample1_5	sample1_9	0.02310453
+sample1_5	sample1_10	0.01822753
+sample1_6	sample1_7	0.00814550
+sample1_6	sample1_8	0.01475515
+sample1_6	sample1_9	0.01805260
+sample1_6	sample1_10	0.01472476
+sample1_7	sample1_8	0.01636654
+sample1_7	sample1_9	0.01635010
+sample1_7	sample1_10	0.01634613
+sample1_8	sample1_9	0.01968165
+sample1_8	sample1_10	0.01306167
+sample1_9	sample1_10	0.00650148
+sample1_1	sample2_1	0.04150894
+sample1_1	sample2_2	0.04481757
+sample1_1	sample2_3	0.04118581
+sample1_1	sample2_4	0.04270911
+sample1_1	sample2_5	0.04747813
+sample1_2	sample2_1	0.05057603
+sample1_2	sample2_2	0.05171311
+sample1_2	sample2_3	0.04812485
+sample1_2	sample2_4	0.04961091
+sample1_2	sample2_5	0.05477126
+sample1_3	sample2_1	0.03972601
+sample1_3	sample2_2	0.04303673
+sample1_3	sample2_3	0.03941800
+sample1_3	sample2_4	0.04094676
+sample1_3	sample2_5	0.04565166
+sample1_4	sample2_1	0.04504876
+sample1_4	sample2_2	0.04836577
+sample1_4	sample2_3	0.04469536
+sample1_4	sample2_4	0.04620262
+sample1_4	sample2_5	0.05131233
+sample1_5	sample2_1	0.04334661
+sample1_5	sample2_2	0.04666904
+sample1_5	sample2_3	0.03936277
+sample1_5	sample2_4	0.04289655
+sample1_5	sample2_5	0.04391926
+sample1_6	sample2_1	0.03786664
+sample1_6	sample2_2	0.03934172
+sample1_6	sample2_3	0.02892074
+sample1_6	sample2_4	0.03903859
+sample1_6	sample2_5	0.03833404
+sample1_7	sample2_1	0.03951028
+sample1_7	sample2_2	0.03750406
+sample1_7	sample2_3	0.02690821
+sample1_7	sample2_4	0.03726187
+sample1_7	sample2_5	0.03646500
+sample1_8	sample2_1	0.03783088
+sample1_8	sample2_2	0.03930404
+sample1_8	sample2_3	0.03572278
+sample1_8	sample2_4	0.03556032
+sample1_8	sample2_5	0.04008926
+sample1_9	sample2_1	0.03780811
+sample1_9	sample2_2	0.03577112
+sample1_9	sample2_3	0.03227438
+sample1_9	sample2_4	0.02861559
+sample1_9	sample2_5	0.03652437
+sample1_10	sample2_1	0.03085127
+sample1_10	sample2_2	0.03232153
+sample1_10	sample2_3	0.02863239
+sample1_10	sample2_4	0.02520516
+sample1_10	sample2_5	0.03298780
+sample2_1	sample2_2	0.02901092
+sample2_1	sample2_3	0.02746596
+sample2_1	sample2_4	0.03952009
+sample2_1	sample2_5	0.02976398
+sample2_2	sample2_3	0.02367655
+sample2_2	sample2_4	0.04098195
+sample2_2	sample2_5	0.02796319
+sample2_3	sample2_4	0.03345440
+sample2_3	sample2_5	0.01876146
+sample2_4	sample2_5	0.03091119
+</pre>
+</ul>
+<p><li><a class='black' name=tst_fasta>Sequence fasta file.</a>
+<ul>
+If user uploads a pairwise distance file, he has to provide a sequence fasta file that produces the uploaded distance file.
+</ul>
+<p><li><a class='black' name=tst_group>Define sequence groups to compare.</a>
+<dd>
+<img src="/static/images/tst_group.png">
+<p>From the interface above user can designate sequences into two groups for comparison.</p>
+</ul>
+<dd><p><b>5.2 Outputs</b></p>
+<ul>
+<li><p>P values of Z-test and T-test.</li>
+</ul>
+
+<dt><p><b>6. Sequence clustering</a></b>
+<dd><p>
+A genetic similarity cluster identification tool that includes two approaches to defining clusters:  the first is based on 
+pairwise genetic distance and is algorithmically similar to the approach used by HIV-TRACE (a tool developed by Sergei Kosakovksy 
+Pond and Joel Wertheim, in wide use by the CDC); the second is based on phylogenetic branch lengths and is modified from a tool 
+developed by Art Poon.
+<dd><p><b>6.1 Inputs</b>
+<ul>
+<p><li><a class='black' name=seqinput>Sequence fasta file (aligned or unaligned) or newick tree file</a>
+<p><li><a class='black' name=distance>Calculate distance based on</a>
+<ul>
+<li>
+TN93 pairwise genetic distance (adapted from Kosakovsky-Pond, 2018)
+</li></ul>
+<ul>
+<li>phylogenetic branch lengths (adapted from Poon, 2016)
+</li></ul>
+<p><li><a class='black' name=clustersize>Minimum cluster size</a>
+<dd>
+Minimum number of sequences required in a cluster.</dd>
+<p><li><a class='black' name=distancecut>Distance threshold</a>
+<ul>
+Maximum distance between sequences in a cluster.
+</ul>
+<p><li><a class='black' name=email>Your email address</a>
+</ul>
+</p>
+<dd><p><b>6.2 Outputs</a></b>
+<ul>
+<li><p>Sequence clustering CSV file
+
+<li><p>Sequence Distance matrix CSV file
+</ul>
+
+<dt><p><b><a class='black' name=retrieve>7. Retrieve data</a></b>
+<dd>
+<p>
+Users can retrieve finished results via a previously assigned project id.
+<dt><p><b><a class='black' name=reference>8. References</a></b>
+<dd>
+<p>
+<a class='black' name=1> 1. Lanave, C., Preparata, G., Saccone, C. & G. A. Serio. 1984. New method for calculating evolutionary substitution rates. Journal of Molecular Evolution 
+20:86-93.</a><br>
+<a class='black' name=2> 2. Tavare, S. 1986. Some probabilistic and statistical problems on the analysis of DNA sequences. Lectures on Mathematics in the Life Sciences 17:
+57-86.</a><br>
+<a class='black' name=3> 3. Jukes, T. & C. Cantor. 1969. Evolution of protein molecules. In Munro, H. (ed.) Mammalian Protein Metabolism, vol. III, chap. 24, 21-132 
+(Academic Press, New York).</a><br>
+<a class='black' name=4> 4. Kimura, M. A. 1980. Simple method for estimating evolutionary rates of base substitutions through comparative studies of nucleotide sequences. 
+Journal of Molecular Evolution 16:111-120.</a><br>
+<a class='black' name=5> 5. Felsenstein, J. 1981. Evolutionary trees from DNA sequences: a maximum likelihood approach. Journal of Molecular Evolution 17:368-376.</a><br>
+<a class='black' name=6> 6. Hasegawa, M., Kishino, H. & T. Yano. 1985. Dating of the Human-Ape splitting by a molecular clock of mitochondrial-DNA. Journal of Molecular 
+Evolution 22:160-174.</a><br>
+<a class='black' name=7> 7. Tamura, K. & M. Nei. 1993. Estimation of the number of nucleotide substitutions in the control region of mitochondrial DNA in humans and chimpanzees. 
+Molecular Biology and Evolution 10:512-526.</a><br>
+<a class='black' name=8> 8. Le, S. & O. Gascuel. 2008. An improved general amino-acid replacement matrix. Mol. Biol. Evol. 25:1307-1320.</a><br>
+<a class='black' name=9> 9. Nickle DC, Heath L, Jensen MA, Gilbert PB, Mullins JI, Kosakovsky Pond SL. 2007. HIV-specific probabilistic models of protein evolution. 
+PLoS ONE 2:e503.</a><br>
+<a class='black' name=10>10. Whelan, S. & N. Goldman. 2001. A general empirical model of protein evolution derived from multiple protein families using a maximum-likelihood 
+approach. Molecular Biology and Evolution 18:691-699.</a><br>
+<a class='black' name=11>11. Dayhoff, M., Schwartz, R. & B. Orcutt. 1978. A model of evolutionary change in proteins. In Dayhoff, M. (ed.) Atlas of Protein Sequence and Structure, 
+vol. 5, 345-352 (National Biomedical Research Foundation, Washington, D. C.).</a><br>
+<a class='black' name=12>12. Jones, D., Taylor, W. & J. Thornton. 1992. The rapid generation of mutation data matrices from protein sequences. Computer Applications in the 
+Biosciences (CABIOS) 8:275-282.</a><br>
+<a class='black' name=13> 13. Henikoff, S. & J. Henikoff. 1992. Amino acid substitution matrices from protein blocks. Proceedings of the National Academy of Sciences of the 
+United States of America (PNAS) 89:10915-10919.</a><br>
+<a class='black' name=14>14. Adachi, J. & M. Hasegawa. 1996. MOLPHY version 2.3. programs for molecular phylogenetics based on maximum likelihood. In Ishiguro, M. et al. (eds.) 
+Computer Science Monographs, 28 (The Institute of Statistical Mathematics, Tokyo).</a><br>
+<a class='black' name=15>15. Dimmic, M., Rest, J., Mindell, D. & D. Goldstein. 2002. rtREV: an amino acid substitution matrix for inference of retrovirus and reverse 
+transcriptase phylogeny. Journal of Molecular Evolution 55:65-73.</a><br>
+<a class='black' name=16>16. Adachi, J., P., W., Martin, W. & M. Hasegawa. 2000. Plastid genome phylogeny and a model of amino acid substitution for proteins encoded by 
+chloroplast DNA. Journal of Molecular Evolution 50:348-358.</a><br>
+<a class='black' name=17>17. Kosiol, C. & N. Goldman. 2004. Different versions of the Dayhoff rate matrix. Molecular Biology and Evolution 22:193-199.</a><br>
+<a class='black' name=18>18. Muller, T. & M. Vingron. 2000. Modeling amino acid replacement. Journal of Computational Biology 7:761-776.</a><br>
+<a class='black' name=19>19. Abascal F, Posada D, Zardoya R. 2007. MtArt: a new model of amino acid replacement for Arthropoda. Mol Biol Evol. 24:1-5.</a><br>
+<a class='black' name=20>20. Cao, Y. et al. 1998. Conflict among individual mitochondrial proteins in resolving the phylogeny of eutherian orders. Journal of Molecular 
+Evolution 47:307-322.</a><br>
+<a class='black' name=21>21. Yang, Z. 1994. Maximum likelihood phylogenetic estimation from DNA sequences with variable rates over sites: approximate methods.
+J Mol Evol. 39:306-14.</a><br>
+<a class='black' name=22>22. Guindon, S. & O. Gascuel. 2003. A simple, fast and accurate algorithm to estimate large phylogenies by maximum likelihood. Systematic Biology 
+52:696-704.</a><br>
+<a class='black' name=23>23. Hordijk W. & O. Gascuel. 2005. Improving the efficiency of SPR moves in phylogenetic tree search methods based on maximum likelihood.
+Bioinformatics 21:4338-4347.</a><br>
+<a class='black' name=24>24. Anisimova M. & O. Gascuel. 2006.  Approximate Likelihood-Ratio Test for Branches: A Fast, Accurate, and Powerful Alternative. Systematic Biology, 
+55:539-552.</a><br>
+<a class='black' name=25>25. Stamatakis, A. et al. A rapid bootstrap algorithm for the raxml web servers, Syst. Biol., 2008, 57:758-771.</a><br>
+<a class='black' name=26>26. Stamatakis, A. Phylogenetic models of rate heterogeneity: a high performance computing perspective, Proceedings 20th IEEE International Parallel & Distributed Processing Symposium, Rhodes Island, 2006, pp. 8 pp.-.</a><br>
+</dl>
+</div>
+	<div id="footer" align="center">
+		<p class="copyright">&copy; 2025 Fred Hutch Cancer Center. All rights reserved.</p>
+	</div>
+</div>
+</body>
+</html>

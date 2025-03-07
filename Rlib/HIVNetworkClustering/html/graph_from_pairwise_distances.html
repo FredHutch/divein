@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Construct a graph from a data frame of pairwise distances...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for graph_from_pairwise_distances {HIVNetworkClustering}"><tr><td>graph_from_pairwise_distances {HIVNetworkClustering}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Construct a graph from a data frame of pairwise distances between nodes</h2>
+
+<h3>Description</h3>
+
+<p>Edges are drawn between nodes within a specified distance of each other
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+graph_from_pairwise_distances(distances, max_distance)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>distances</code></td>
+<td>
+<p>A data frame where the first two columns contain node names
+and another column, <code>distance</code>, contains distances</p>
+</td></tr>
+<tr valign="top"><td><code>max_distance</code></td>
+<td>
+<p>The distance above which edges are not drawn between nodes</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>An undirected graph of class <code>igraph</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>HIVNetworkClustering</em> version 0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

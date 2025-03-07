@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Identify clusters in an alignment by nucleotide distance</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for cluster_by_tn93_distance {HIVNetworkClustering}"><tr><td>cluster_by_tn93_distance {HIVNetworkClustering}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Identify clusters in an alignment by nucleotide distance</h2>
+
+<h3>Description</h3>
+
+<p>Uses TN93 distances with parameters from HIV-TRACE
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+cluster_by_tn93_distance(alignment, min_size = 5,
+  distance_threshold = 0.015)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>alignment</code></td>
+<td>
+<p>A DNAStringSet of aligned sequences
+or a filesystem path to a multiple-sequence alignment</p>
+</td></tr>
+<tr valign="top"><td><code>min_size</code></td>
+<td>
+<p>Minimum size of components to report as clusters</p>
+</td></tr>
+<tr valign="top"><td><code>distance_threshold</code></td>
+<td>
+<p>Pairwise TN93 distance between taxa not
+exceeding this threshold will be clustered together</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A named numeric vector; the names are sequence ids from the alignment, the
+values are the component of the clustering graph the named taxon is
+connected to, if the component size is at least <code>min_size</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>HIVNetworkClustering</em> version 0.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

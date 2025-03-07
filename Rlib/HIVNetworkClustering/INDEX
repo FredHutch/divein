@@ -1,0 +1,18 @@
+FastTree                Run FastTree in GTR mode on an aligned
+                        DNAStringSet
+cluster_by_patristic_distance
+                        Identify clusters in a phylogeny
+cluster_by_tn93_distance
+                        Identify clusters in an alignment by nucleotide
+                        distance
+clusters_from_graph     Compute clusters of nodes from a graph
+graph_from_pairwise_distances
+                        Construct a graph from a data frame of pairwise
+                        distances between nodes
+mafft                   Run mafft in automatic mode on a DNAStringSet
+patristic_distances     Compute the pairwise patristic distances over a
+                        phylogeny
+tn93                    Calculate TN93 pairwise distances on a
+                        multiple-alignment
+tn93_distances          Compute the TN93 pairwise distances over an
+                        alignment
