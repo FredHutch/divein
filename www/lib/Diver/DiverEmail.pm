@@ -17,7 +17,7 @@ sub SendEmail {
 		<p>The result will be kept 5 days after this message was sent.</p>";	
 	}else {
 		if ($errorMsg eq "monophyletic") {
-			$emailbody = "<p>Couldn't find the MRCA node duo to improper outgroup sequence position. Please click <a href='https://divein.fredhutch.org/cgi-bin/diver/result.cgi?id=$id&type=$type&format=$diverFormat&diverseqNames=$diverseqNames'>here</a> to check the output tree.</p>";
+			$emailbody = "<p>Couldn't find the MRCA node duo to improper outgroup sequence position.</p>";
 		}elsif ($errorMsg eq "notree") {
 			$emailbody = "<p>Couldn't get reconstructed tree. Probablly the input sequence dataset is too large (too many sequences), or the sequence data type (DNA or protein) you entered is not correct.</p>";
 		}else {
