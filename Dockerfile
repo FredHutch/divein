@@ -115,7 +115,7 @@ RUN crontab /etc/cron.d/crontab
 # Set permissions for outputs and stat 
 RUN chmod -R 777 /var/www/html/outputs
 RUN chmod -R 777 /var/www/html/stats
-# RUN chmod -R 777 /var/www/html/treeImages
+RUN chmod -R 777 /var/www/html/treeImages
 
 # Expose port 80 to allow web traffic
 EXPOSE 80
